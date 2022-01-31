@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="Member">
+  <insert id="join" parameterType="memberbean">
+	INSERT INTO TBL_MEMBER 
+	VALUES(MEMBER_SEQ.NEXTVAL, #{member_id},#{member_name},#{member_pw},#{member_email},#{member_phone},
+	0,#{member_file},#{member_addr},#{detail_addr}, #{url}, #{member_postcode}, #{member_iddn}, #{etc_addr})
+  </insert>
+  
+  <select id="login" parameterType="hashmap" resultType="memberbean">
+		SELECT * FROM TBL_MEMBER WHERE MEMBER_ID=#{member_id} AND MEMBER_PW=#{member_pw}
+	</select>
+	
+	<select id="checkId" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM TBL_MEMBER WHERE MEMBER_ID=#{member_id}
+	</select>
+	
+	<!--<update id="modifyInfo" parameterType="memberbean">
+		UPDATE TBL_MEMBER SET
+		MEMBER_ID = #{member_id}, MEMBER_PW = #{member_pw}, MEMBER_EMAIL=#{member_email}
+		WHERE MEMBER_NUM=${member_num}
+	</update>-->
+	
+	<delete id="delete" parameterType="_int">
+		DELETE FROM TBL_MEMBER WHERE MEMBERNUM = ${membernum}
+	</delete>
+  </mapper>

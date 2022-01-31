@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="Recipe">
+	<insert id="insertRecipe" parameterType="recipebean">
+		INSERT INTO TBL_RECIPE
+		VALUES(recipe_SEQ.NEXTVAL,#{rc_title},#{rc_contents},
+		#{rc_cate},#{rc_info},#{rc_time},#{rc_dif},SYSDATE,0,'apple1',1,0,#{rc_file_title},
+		#{st_step},#{st_content},#{st_tip},#{st_file_name},#{in_name},#{in_amount})
+	</insert>
+  
+	<select id="RecipeSeq" resultType="_int">
+		SELECT recipe_SEQ.CURRVAL FROM DUAL
+	</select>
+	<select id="RecipeCnt" resultType="_int">
+		SELECT COUNT(*) FROM TBL_RECIPE	
+	</select>
+	<select id="listAll" parameterType="hashmap" resultType="recipebean">
+		SELECT * FROM
+			(SELECT ROWNUM r, d.*
+			FROM (SELECT * FROM TBL_RECIPE ORDER BY RC_NUM DESC) d) b
+		WHERE b.r BETWEEN ${startRow} AND ${endRow}
+	</select>
+	<select id="getDetail" parameterType="_int" resultType="recipebean">
+		SELECT * FROM TBL_RECIPE WHERE RC_NUM = ${rc_num}
+	</select>
+  	<update id="updateViewCnt" parameterType="_int">
+		UPDATE TBL_RECIPE SET RC_VIEWCNT = RC_VIEWCNT+1
+		WHERE RC_NUM=${rc_num}
+	</update>
+  </mapper>
