@@ -19,8 +19,7 @@ public class MemberJoinOkAction {
 		
 		MemberDAO mdao = new MemberDAO();
 		MemberBean member = new MemberBean();
-		String filePath = "C:\\Web_1500\\JSP\\workspace\\project\\WebContent\\app\\upload";
-//		String filePath = "../app/upload";
+		String filePath = "D:\\Web\\workspace\\newCooking\\WebContent\\app\\upload";
 		int fileSize = 5 * 1024 * 1024;
 		
 		MultipartRequest mul = new MultipartRequest(request, filePath, fileSize, "UTF-8", new DefaultFileRenamePolicy());
@@ -44,7 +43,7 @@ public class MemberJoinOkAction {
 			response.addCookie(cookie);
 			
 			forward.setRedirect(true);
-			forward.setPath(request.getContextPath()+"/app/member/login.jsp");
+			forward.setPath("/app/member/memberLogin.jsp");
 		}
 		return forward;
 	}

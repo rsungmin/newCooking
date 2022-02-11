@@ -60,6 +60,7 @@ public class MemberFrontController extends HttpServlet{
 				forward = new CheckIdAction().execute(request, response);
 			} catch (Exception e) {
 				System.out.println("/member/CheckId 오류");
+				System.out.println("오류: "+e);
 			}
 		} else if(command.equals("/member/MemberLogout.me")){
 			request.getSession().invalidate();
