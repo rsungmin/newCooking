@@ -21,16 +21,16 @@ ActionForward forward = new ActionForward();
 		RecipeDAO rdao = new RecipeDAO();
 		RecipeBean recipe = new RecipeBean();
 		
-		String filePath = "C:\\kth\\project\\workspace\\newCooking\\WebContent\\app\\upload";
+		String filePath = "D:\\Web\\workspace\\newCooking\\WebContent\\app\\upload";
 //		String filePath = "../app/upload";
 		int fileSize = 5 * 1024 * 1024;
-		
 		boolean rcheck1 = false;
-		boolean scheck2 = false;
-		boolean icheck3 = false;
+		//boolean scheck2 = false;
+		//boolean icheck3 = false;
 		
 		MultipartRequest mul = new MultipartRequest(request, filePath, fileSize, "UTF-8", new DefaultFileRenamePolicy());
 		Enumeration<String> files = mul.getFileNames();
+		System.out.println("files = " + files);
 		//recipe 
 		recipe.setRc_title((mul.getParameter("rc_title")));
 		recipe.setRc_contents((mul.getParameter("rc_contents")));
@@ -39,17 +39,19 @@ ActionForward forward = new ActionForward();
 		recipe.setRc_time((mul.getParameter("rc_time")));
 		recipe.setRc_dif((mul.getParameter("rc_dif")));
 		recipe.setRc_file_title(mul.getFilesystemName(files.nextElement()));
-		recipe.setSt_step(mul.getParameter("st_step"));
+		/*recipe.setSt_step(mul.getParameter("st_step"));*/
 		recipe.setSt_content(mul.getParameter("st_content"));
-		recipe.setSt_tip(mul.getParameter("st_tip"));
-		recipe.setSt_file_name(mul.getFilesystemName(files.nextElement()));
+		/*recipe.setSt_tip(mul.getParameter("st_tip"));*/
+/*		recipe.setSt_file_name(mul.getFilesystemName(files.nextElement()));*/
 		recipe.setIn_name(mul.getParameter("in_name"));
-		recipe.setIn_amount(mul.getParameter("in_amount"));
+		/*recipe.setIn_amount(mul.getParameter("in_amount"));*/
 		
 		rcheck1 = rdao.insertRecipe(recipe);
 		
-		forward.setRedirect(true);
-		forward.setPath(request.getContextPath()+"/app/recipe/recipeView.jsp");
+		if(rcheck1) {
+			forward.setRedirect(true);
+			forward.setPath(request.getContextPath()+"/recipe/recipeList.rc?page=1");			
+		}
 		
 		return forward;
 	}

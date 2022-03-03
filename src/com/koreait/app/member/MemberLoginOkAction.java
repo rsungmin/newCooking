@@ -21,12 +21,13 @@ public class MemberLoginOkAction implements Action{
 		String member_pw = request.getParameter("member_pw");
 		MemberBean member = mdao.login(member_id,member_pw);
 		if(member == null) {
-			forward.setPath(request.getContextPath()+"/app/member/login.jsp?result=false");
+			forward.setPath("/app/member/memberLogin.jsp?result=false");
 		} else {
 			session.setAttribute("session_id", member);
+			System.out.println("session_id 생성");
+			forward.setRedirect(true);
 			forward.setPath(request.getContextPath()+"/main.jsp");
 		}
-		forward.setRedirect(true);
 		return forward;
 	}
 	

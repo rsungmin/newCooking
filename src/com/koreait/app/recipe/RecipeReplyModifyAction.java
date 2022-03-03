@@ -23,7 +23,7 @@ public class RecipeReplyModifyAction implements Action{
 	      ReplyDAO rdao = new ReplyDAO();
 	      ReplyBean reply = new ReplyBean();
 	      
-	     String filePath = "E:\\WEB\\JSP\\workspace\\project1\\WebContent\\app\\upload";
+	     String filePath = "D:\\Web\\workspace\\newCooking\\WebContent\\app\\upload";
 		  int fileSize = 5 * 1024 * 1024;
 	      
 	      MultipartRequest mul = new MultipartRequest(request, filePath, fileSize, "UTF-8", new DefaultFileRenamePolicy());
@@ -51,7 +51,7 @@ public class RecipeReplyModifyAction implements Action{
 	      
 	      
 	      forward.setRedirect(true);
-	      forward.setPath(request.getContextPath()+"/recipe/recipeView.re?rc_num="+rc_num);
+	      forward.setPath(request.getContextPath()+"/recipe/recipeView.rc?rc_num="+rc_num);
 	      return forward;
 	   }
 

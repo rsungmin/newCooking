@@ -23,7 +23,9 @@ public class RecipeDAO {
 	
 //	레시피수정
 	public boolean updateRecipe(RecipeBean recipe) { 
-		return sqlsession.update("Recipe.updateRecipe",recipe)==1;
+		System.out.println("RecipeDAO recipe = " + recipe);
+		System.out.println(sqlsession.update("Recipe.updateRecipe",recipe) == 1);
+		return sqlsession.update("Recipe.updateRecipe",recipe) == 1;
 	}
 	
 //	레시피삭제
@@ -36,11 +38,6 @@ public class RecipeDAO {
 		return sqlsession.selectOne("Recipe.recipedCnt");
 	}
 	
-//	 리스트 보여주기  
-	public List<RecipeBean> listAll(int startRow, int endRow ) {
-		return sqlsession.selectList("Recipe.listAll");
-	}
-	
 //	검색
 	public List<RecipeBean> getListWithPaging(Criteria cri) {
 		return sqlsession.selectList("Recipe.getListWithPaging", cri);		
@@ -50,6 +47,7 @@ public class RecipeDAO {
 		return sqlsession.selectOne("Recipe.getTotal");
 		
 	}
+	
 //	상세보기
 	public RecipeBean getDetail(int rc_num) {
 		return sqlsession.selectOne("Recipe.getDetail",rc_num);
@@ -60,10 +58,16 @@ public class RecipeDAO {
 		sqlsession.update("Recipe.updateViewCnt",rc_num);
 	}
 
+//	좋아요 수 증가
+	public void updateLikeCnt(int rc_num) {
+		sqlsession.update("Recipe.updateLikeCnt",rc_num);
+	}
+	
 	public int getRecipeCnt() {
 		return sqlsession.selectOne("Recipe.RecipeCnt");
 	}
 
+//	리스트 가져오기
 	public List<RecipeBean> getRecipeList(int startRow, int endRow) {
 		HashMap<String, Integer> datas = new HashMap<>();
 		datas.put("startRow", startRow);
@@ -71,5 +75,42 @@ public class RecipeDAO {
 		List<RecipeBean> recipeList =sqlsession.selectList("Recipe.listAll", datas);
 		return recipeList;
 	}
+	
+//	한식 리스트 가져오기
+	public List<RecipeBean> getRecipeListKor(int startRow, int endRow){
+		HashMap<String, Integer> datas = new HashMap<>();
+		datas.put("startRow", startRow);
+		datas.put("endRow", endRow);
+		List<RecipeBean> recipeList = sqlsession.selectList("Recipe.listKor", datas);
+		return recipeList;
+	}
+//	메인 리스트 가져오기
+	public List<RecipeBean> getRecipeListMain(){
+		List<RecipeBean> recipeList=sqlsession.selectList("Recipe.listMain");
+		return recipeList;
+	}
+//	게시글 추천여부 검사
+	public int recCheck(HashMap<String, Object> datas) {
+		int result=0;
+		result = (Integer) sqlsession.selectOne("Recipe.recCheck", datas);		
+		return result;
+	}
+	
+//	게시글 추천
+	public void recUpdate(HashMap<String, Object> datas) {
+		sqlsession.insert("Recipe.recUpdate",datas);		
+	}
+	
+//	게시글 추천 제거
+	public void recDelete(HashMap<String, Object> datas) {
+		sqlsession.insert("Recipe.recDelete", datas);
+		
+	}
 
+//	게시글 추천수
+	public int recCount(int rc_num) {
+		int count=0;
+		count = (Integer)sqlsession.selectOne("Recipe.recCount",rc_num);
+		return count;
+	}
 }

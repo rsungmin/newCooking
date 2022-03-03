@@ -11,6 +11,7 @@ import javax.sql.rowset.serial.SerialException;
 
 import com.koreait.action.Action;
 import com.koreait.action.ActionForward;
+import com.koreait.app.recipe.dao.RecipeBean;
 import com.koreait.app.recipe.dao.RecipeDAO;
 
 public class RecipeListAction implements Action {
@@ -23,11 +24,19 @@ public class RecipeListAction implements Action {
 		HttpSession session = request.getSession();
 		
 		
-		
+		/*int page;
+		try {
+			String temp = request.getParameter("page");
+			page = temp==null?1:Integer.parseInt(temp);			
+			System.out.println("temp: "+temp);
+		}catch(Exception e) {
+			page=1;
+		}*/
 		String temp = request.getParameter("page");
-		System.out.println("temp: "+temp);
-		int page = temp==null?1:Integer.parseInt(temp);
+		int page = temp==null?1:Integer.parseInt(temp);			
+		System.out.println("temp: "+temp);		
 		System.out.println("page: "+page);
+		
 		int pagesize = 9;
 		int totalCnt = rdao.getRecipeCnt();
 		
@@ -39,19 +48,22 @@ public class RecipeListAction implements Action {
 		int endPage = startPage+(pagesize-1);
 		int totalPage = (totalCnt-1)/pagesize +1; 
 		endPage = endPage>totalPage?totalPage:endPage;
-		System.out.println("�쟾�넚�쟾");
+		
 		request.setAttribute("totalPage", totalPage);
 		request.setAttribute("totalCnt", totalCnt);
 		request.setAttribute("nowPage", page);
 		request.setAttribute("startPage",startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("recipeList", rdao.getRecipeList(startRow,endRow));
+		
 		//recipeList �씪�뒗 attribute�뿉 rdao由ъ뒪�듃瑜� �떞�뒗�떎
-		System.out.println("total : " + totalPage);
-		System.out.println("start " + startRow);
-		System.out.println("end " + endRow);
+		System.out.println("totalPage : " + totalPage);
+		System.out.println("totalCnt : "+totalCnt );
+		System.out.println("startRow " + startRow);
+		System.out.println("endRow " + endRow);
 		
 		String recipe = request.getParameter("recipe");
+		System.out.println("recipe: "+recipe);
 		PrintWriter out = response.getWriter();
 		if(recipe != null) {
 			System.out.println("ㅇㅋ");
@@ -61,7 +73,8 @@ public class RecipeListAction implements Action {
 		}
 		
 		forward.setRedirect(false);
-		forward.setPath("/main.jsp");
+		/*forward.setPath("/main.jsp");*/
+		forward.setPath("/app/recipe/recipeList.jsp?page="+page);
 		return forward;
 		
 		

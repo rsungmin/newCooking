@@ -29,7 +29,7 @@ public class RecipeReplyOkAction implements Action {
 		/*String rc_num =request.getParameter("rc_num");
 		System.out.println("rc_num: "+rc_num);*/
 		
-		String filePath = "E:\\WEB\\JSP\\workspace\\project1\\WebContent\\app\\upload";
+		String filePath = "D:\\Web\\workspace\\newCooking\\WebContent\\app\\upload";
 		int fileSize = 5 * 1024 * 1024;
 		
 //		HttpSession session = request.getSession(false);
@@ -55,7 +55,7 @@ public class RecipeReplyOkAction implements Action {
 			reply.setMember_id(mul.getParameter("member_id"));
 			reply.setRc_num(Integer.parseInt(mul.getParameter("rc_num")));
 			reply.setReply_contents(mul.getParameter("reply_contents"));
-			reply.setReply_file_name(mul.getFilesystemName(files.nextElement()));
+//			reply.setReply_file_name(mul.getFilesystemName(files.nextElement()));
 		
 		
 		
@@ -64,7 +64,7 @@ public class RecipeReplyOkAction implements Action {
 			
 			if(rdao.insertReply(reply)) {
 				forward.setRedirect(true);			
-				forward.setPath(request.getContextPath()+"/recipe/recipeView.re?rc_num="+rc_num);
+				forward.setPath(request.getContextPath()+"/recipe/recipeView.rc?rc_num="+rc_num);
 				System.out.println("action forward: "+forward);
 				return forward;
 			}

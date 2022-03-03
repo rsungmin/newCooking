@@ -17,6 +17,7 @@ public class CheckIdAction implements Action{
 		MemberDAO mdao = new MemberDAO();
 		
 		String member_id = request.getParameter("member_id");
+		System.out.println("member_id: "+member_id);
 		PrintWriter out = response.getWriter();
 		if(mdao.checkId(member_id)) {
 			out.println("ok");

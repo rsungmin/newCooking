@@ -13,65 +13,8 @@
 		<title>Untitled</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="../../green/assets/css/main.css" />
+		<link rel="stylesheet" href="../green/assets/css/main.css" />
 <style>
-	.cook{
-		text-decoration: none;
-		border-bottom: none;
-		display: inline-block;
-	}
-	.cook img{
-		width: 80px;
-		height: 65px;
-	}
-	#header{
-		padding: 0 1em 0 1em;
-		height: 4.5em;
-		border-bottom: 3px solid green;
-	}
-	#header > nav{
-		margin: auto;
-		float: left;
-		letter-spacing: 0.002em !important;
-	}
-	#header > nav > ul > li.cookSearch{
-		padding-top: 7px;
-	}
-	#header > .navi{
-		text-align: center;
-	}
-	body{
-		background: none;
-	}
-	.cookSearch{
-		position: absolute;
-		float: right;
-		padding-left: 40px;
-		width: 440px;
-	}
-	.cookSearch > a{
-		text-decoration: none;
-		border-bottom: none;
-		padding-left: 10px;
-	}
-	.cookSearch > a > img{
-		padding-top: 3%;
-	}
-	.searchInput{
-		width: 280px !important;  
-		float: left;
-		padding: 0 auto;
-		margin: 0 auto;
-	}
-	.cookFooter{
-		height: 300px;
-	}
-	.cookSearch > a > img{
-		padding-top: 6px;
-		padding-left: 15px;
-		float: left;
-	}
-	/* ---- */
 	a{	
 	border-bottom: none;
 	}
@@ -114,120 +57,100 @@
 		margin-left:10px;
 		background-position: center center;
 		background-size: cover;
-	}			
+	}		
+	.info{
+		margin-left:15%;
+	}	
+	#heart2{
+		display:none; 
+		color:red;
+	}
+	.top{
+		text-align: center;
+	}
+	.mid{
+		padding-left:80px; 
+		margin-right:30%;
+	}
+	textarea{
+		white-space:pre; 
+		resize:none
+	}
+	#replyForm{
+		width:100%; 
+		padding-left:60px; 
+		padding-right:60px;
+	}
+	#reply_contents{
+		resize:none; 
+		width:80%; 
+		display:inline-block; 
+		float:left;
+	}
+	#input-file{
+		display:none; 
+		align:right;
+	}
+	#reg{
+		float:right; 
+		margin-top:10px;
+	}
+	#float{
+		float:right;
+	}
 </style>
 	</head>
 	<body class="is-preload">
 
 		<!-- Header -->
-			<div id="header">
-				<a class="cook" href="index.html"><img src="../../green/images/logomain.png"></a>
-				<nav id="nav" class="navi">
-					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li>
-							<a href="#">My Page</a>
-							<ul>
-								<li><a href="#">My Recipe</a></li>
-								<li><a href="#">My Liked Recipe</a></li>
-								<li><a href="#">Follow Recipe</a></li>
-								<li>
-									<a href="#">My Menu</a>
-									<ul>
-										<li><a href="#">구매내역</a></li>
-										<li><a href="#">포인트 관리</a></li>
-										<li><a href="#">회원정보 수정</a></li>
-										<li><a href="#">문의</a></li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-						<li><a href="#">포인트 상점</a></li>
-						<li><a href="#">로그아웃</a></li>
-						<li class="cookSearch">
-	                   		<input class="searchInput" type="text" placeholder="Search">      
-                  			<a href="#"><img src="../../green/images/searchBtnSmall.png"></a>
-	                  	</li>
-					</ul>
-					
-	                  	
-				</nav>
-			</div>
+		
+			<%@include file="../../app/include/header_r.jsp" %>
 
 		<!-- Main -->
+		
+		<c:set var="recipe" value="${requestScope.recipe}"/>
+		<c:set var="replyList" value="${requestScope.replyList}" />
+		
 			<div id="main">
-				<a href="javascript:modifyRecipe();">[수정]</a>
-				<a href="javascript:deleteRecipe();">[삭제]</a>
+				<c:if test="${recipe.getMember_id() eq session_id.getMember_id()}">
+					<a href="javascript:modifyRecipe();">[수정]</a> 				
+					<a href="javascript:deleteRecipe();">[삭제]</a>
+				</c:if>
+				<a href="${pageContext.request.contextPath}/recipe/recipeList.rc?page=1">[목록]</a>
 				<section id="content" class="wrapper">
-						<span class="image main"><img src="../../green/images/pic081.jpg"></span>
-						<div style="text-align: center;">
+						<span class="image main"><img src="../app/upload/${recipe.getRc_file_title()}"></span>
+						<div class="top">
 							<h2><strong>${recipe.getRc_title()}</strong></h2>													
 							<p>${recipe.getRc_contents() }</p>
-							<div style="width:100%;"><i class="fas fa-user-friends"></i>${recipe.getRc_info() }
-								<span style="margin-left:15%;"><i class="far fa-clock"></i>${recipe.getRc_time() }</span>
-								<span style="margin-left:20%;"><i class="far fa-clock"></i>${recipe.getRc_dif() }</span>
+							<div style="width:100%;"><i class="fas fa-user-friends"></i> ${recipe.getRc_info() }
+								<span style="margin-left:15%;"><i class="far fa-clock"></i> ${recipe.getRc_time() }</span>
+								<span style="margin-left:20%;"><i class="far fa-clock"></i> ${recipe.getRc_dif() }</span>
 							</div>
 						</div>
 					<hr>
-						<div style="text-align: center;">
-							<a ><i class="far fa-heart" id="like"></i></a><a><i id="heart2" class="fas fa-heart" style="display:none; color:red;"></i></a>좋아요
-							<span style="margin-left:15%;"><a href="#reply"><i class="far fa-comment-dots"></i>댓글</a></span>
+						<div class="top">
+							<a id="rec_update" onClick="javascript:recUpdate();"><i class="far fa-heart" id="like"></i><i id="heart2" class="fas fa-heart"></i></a>&nbsp;
+							<span class="rec_count"></span>
+							<span class="info"><a href="#reply"><i class="far fa-comment-dots"></i>댓글</a></span>
+							<span class="info">${recipe.getMember_id()}</span>
 						</div>
 					<hr>
 					<h4>재료</h4>
-					<div style="display:inline-block; padding-left:80px; margin-right:30%; float:left;">
-						<h5>[주재료]</h5>
-						<ul class="alt">
-							<li>Dolor pulvinar etiam.</li>
-							<li>Sagittis adipiscing.</li>
-							<li>Felis enim feugiat.</li>
-						</ul>
-					</div>
-					<div style="display:inline-block; ">
-						<h5>[양념]</h5>
-						<ul class="alt">
-							<li>Dolor pulvinar etiam.</li>
-							<li>Sagittis adipiscing.</li>
-							<li>Felis enim feugiat.</li>
-							<li>Dolor pulvinar etiam.</li>
-							<li>Sagittis adipiscing.</li>
-							<li>Felis enim feugiat.</li>
-							<li>Dolor pulvinar etiam.</li>
-							<li>Sagittis adipiscing.</li>
-							<li>Felis enim feugiat.</li>
-						</ul>
-					</div>
-					<hr>
+					<div class="mid">						
+						<textarea name="in_name" rows="5" cols="10" readonly>${recipe.getIn_name() }</textarea>
+					</div>		
+					<br><br><br>			
 					<h4>조리순서</h4>
-					<div>
-						<div style="display:inline-block; float:left; padding-left:60px;">1.Dolor pulvinar etiam Sagittis adipiscing Felis enim feugiat.</div>
-						<!-- <img> -->
-						<div class="pic"></div>
+					<div class="mid">
+						<textarea name="st_content" rows="5" cols="10" readonly>${recipe.getSt_content() }</textarea>
 					</div>
-					<div>
-						<div style="display:inline-block; float:left; padding-left:60px;">1.Dolor pulvinar etiam Sagittis adipiscing Felis enim feugiat.
-						<blockquote ><i class="fas fa-check" style="color:#8bcac6;"></i>팁<br>에어프라이기가 없다면 프라이팬에 기름을 살짝 두른 후 팬을 달군</blockquote>
-						</div>
-						<!-- <img> -->
-						<div class="pic"></div>
-					</div>
-					<div>
-						<div style="display:inline-block; float:left; padding-left:60px;">1.Dolor pulvinar etiam Sagittis adipiscing Felis enim feugiat.</div>
-						<!-- <img> -->
-						<div class="pic"></div>
-					</div>
-					<hr>
-						<h4>레시피 작성자</h4>
-						<div style="padding-left:50px; padding-right:50px;">
-							<div style="margin-bottom: 10px;"><div class="circle"></div><a href="#"><strong>${recipe.getMember_id()}</strong></a></div>
-							<div> 유튜브요리소식보러가기 구독,좋아요,알림설정해주시면 감사해요!</div>
-						</div>
+					
 					<hr>
 					
 					<!--댓글  -->
 					
-					<h4 style="margin-bottom:30px;"><a id="reply">댓글</a></h4>	
-					<form style="width:100%; padding-left:60px; padding-right:60px;" name="replyForm" 
+					<h4><a id="reply">댓글</a></h4>	
+					<form name="replyForm" id="replyForm"
 					action="${pageContext.request.contextPath}/recipe/recipeReplyOk.rc" method="post" enctype="multipart/form-data">	
 						<c:choose>
 							<c:when test="${replyList != null and fn:length(replyList)>0}">				
@@ -236,16 +159,21 @@
 									<c:set var="i" value="${i+1}"/> 
 									<tr>
 										<td>
-										<c:out value="${reply.getReply_num()}"/>&nbsp;&nbsp;
-										<c:out value="${reply.getMember_id()}"/></td>
-										<td><img class="img" src="../../green/images/${reply.getReply_file_name()}.jpg">				
-										<textarea name="reply_contents${i}" id="${i}" readonly
-												style="resize: none; width: 700px; height: 70px">${reply.getReply_contents()}</textarea>										
-										  <c:if test="${reply.getMember_id() eq session_id.getMember_id()}">
-												<a id="ready${i}" href="javascript:updateReply(${i})" >[수정]</a> &nbsp;&nbsp;
-												<a id="ok${i}" href="javascript:replyUpdateOk(${i},${recipe.getRc_num()},${reply.getReply_num()})" style="display:none; ">[수정완료]</a>		 					
-		 										<a href="${pageContext.request.contextPath}/recipe/recipeReplyDelete.rc?reply_num=${reply.getReply_num()}&rc_num=${recipe.getRc_num()}" onclick="deleteReply()">[삭제]</a><br>
-		 								  </c:if>  
+											<c:out value="${reply.getReply_num()}"/>&nbsp;&nbsp;
+											<c:out value="${reply.getMember_id()}"/>
+										</td>
+										<td>
+											<div id="float">								
+											  <c:if test="${reply.getMember_id() eq session_id.getMember_id()}">
+													<a id="ready${i}" href="javascript:updateReply(${i})" >[수정]</a> &nbsp;&nbsp;
+													<a id="ok${i}" href="javascript:replyUpdateOk(${i},${recipe.getRc_num()},${reply.getReply_num()})" style="display:none; ">[수정완료]</a>		 					
+			 										<a href="${pageContext.request.contextPath}/recipe/recipeReplyDelete.rc?reply_num=${reply.getReply_num()}&rc_num=${recipe.getRc_num()}" onclick="deleteReply()">[삭제]</a><br>
+			 								  </c:if>  
+			 								 </div>		
+											<br><img class="img" src="../app/upload/${reply.getReply_file_name()}"><br>
+											<textarea name="reply_contents${i}" id="${i}" readonly
+													style="resize: none; width: 700px; height: 70px;">${reply.getReply_contents()}</textarea>
+			 								  <br>
 										</td>									
 									</tr>
 								</c:forEach>
@@ -259,52 +187,26 @@
 					<div style="float:center;">
 							<input type="hidden" name="rc_num" value="${recipe.getRc_num()}">
 							<input type="hidden" name="member_id" value="${session_id.getMember_id()}">
-							<textarea rows="3" style="resize:none; width:80%; display:inline-block; float:left;" id="reply_contents" name="reply_contents"></textarea>
+							<textarea rows="3" id="reply_contents" name="reply_contents"></textarea>
 							<div id="preview">
 								<label for="input-file" class="imagePreview"><br>
 									<i class="fas fa-plus" style="color:#bdbdbd;"></i>
 								</label>
-								<input id="input-file" name="picture" type="file" style="display:none; align:right;">
+								<input id="input-file" name="picture" type="file">
 							</div>
-						<a class="button small" style="float:right; margin-top:10px;" href="javascript:replySubmit()">등록</a>
+						<a class="button small" id="reg" href="javascript:replySubmit()">등록</a>
 						</div>
 					</form>
 					</section>
 			
 			</div>
-			<form action="" name="recipeForm">
+			<form action="" name="recipeForm" method="get" enctype="multipart/form-data">
 				<input type="hidden" name="rc_num" value="${recipe.getRc_num()}">
 			</form>
 
 		<!-- Footer -->
-			<div id="footer" class="cookFooter">
-			   <a href="#" class="button primary">이용약관</a>
-			   <a href="#" class="button primary">개인정보 취급 방침</a>
-			   <ul class="major-icons">
-			      <li>
-			         <h3 class="icon solid fa-phone major"><span class="label">Phone</span></h3>
-			         <p>(010) 123-4567</p>
-			      </li>
-			      
-			      <li>
-			         <h3 class="icon solid fa-map major"><span class="label">Address</span></h3>
-			         <p>1234 Fictional Road<br />
-			            Nashville, TN 00000</p>
-			      </li>
-			               
-			      <li>
-			         <h3 class="icon solid fa-envelope major"><span class="label">Email</span></h3>
-			         <p><a href="#">cooKing@cooKing.com</a></p>
-			      </li>
-			   </ul>
-			            
-			   <ul class="joined-icons">
-			      <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-			      <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-			      <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-			   </ul>
-  		 <span style="color:blue;">Copyright @CooKing</span>
-</div>
+		
+			<%@include file="../../app/include/footer.jsp" %>
 
 		<!-- Scripts -->
 			<script src="../../green/assets/js/jquery.min.js"></script>
@@ -385,13 +287,51 @@ function deleteReply(){
 }
 function deleteRecipe() {
 	$("form[name='recipeForm']").attr('action',
-			"${pageContext.request.contextPath}/recipe/recipeDelete.rc")
+			"${pageContext.request.contextPath}/recipe/recipeDelete.rc");
 	document.recipeForm.submit();
+	console.log("삭제완료");
 }
 function modifyRecipe(){
 	$("form[name='recipeForm']").attr('action',
-	"${pageContext.request.contextPath}/recipe/recipeModify.rc")
+	"${pageContext.request.contextPath}/recipe/recipeModify.rc");
 document.recipeForm.submit();
+} 
+
+
+
+
+function recUpdate(){
+	// 추천버튼 클릭시(추천 추가 또는 추천 제거)
+	$("#rec_update").click(function(){
+		$.ajax({
+			url: "${pageContext.request.contextPath}/recipe/recipeLike.rc",
+            type: "POST",
+            data: {
+                rc_num: ${recipe.getRc_num()},
+                member_id: '${session_id.getMember_id()}'
+            },
+            success: function () {
+		        recCount();
+            },
+		})
+	})}
+	
+//게시글 추천수
+function recCount() {
+	$.ajax({
+		url: "${pageContext.request.contextPath}/recipe/recipeLikeCount.rc",
+        type: "POST",
+        data: {
+        	rc_num: '${recipe.getRc_num()}',
+        },
+        success: function (count) {
+        	$(".rec_count").html(count);
+        },
+	})
 }
+
+recCount(); // 처음 시작했을 때 실행되도록 해당 함수 호출
+
+
 </script>
 </html>

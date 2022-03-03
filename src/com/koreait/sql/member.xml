@@ -5,8 +5,8 @@
   <mapper namespace="Member">
   <insert id="join" parameterType="memberbean">
 	INSERT INTO TBL_MEMBER 
-	VALUES(MEMBER_SEQ.NEXTVAL, #{member_id},#{member_name},#{member_pw},#{member_email},#{member_phone},
-	0,#{member_file},#{member_addr},#{detail_addr}, #{url}, #{member_postcode}, #{member_iddn}, #{etc_addr})
+	VALUES(MEMBER_SEQ.NEXTVAL, #{member_id}, #{member_name}, #{member_pw}, #{member_email}, #{member_phone},
+	0, #{member_file}, #{member_addr}, #{detail_addr}, #{url}, #{member_postcode}, #{member_iddn}, #{etc_addr})
   </insert>
   
   <select id="login" parameterType="hashmap" resultType="memberbean">
@@ -16,14 +16,33 @@
 	<select id="checkId" parameterType="string" resultType="_int">
 		SELECT COUNT(*) FROM TBL_MEMBER WHERE MEMBER_ID=#{member_id}
 	</select>
-	
+	<select id="getDetail" parameterType="string" resultType="memberbean">
+		SELECT * FROM TBL_MEMBER WHERE MEMBER_ID=#{member_id}
+	</select>
+	<select id="findId" parameterType="hashmap" resultType="memberbean">
+		SELECT * FROM TBL_MEMBER WHERE MEMBER_NAME=#{member_name} AND MEMBER_PHONE=#{member_phone}
+	</select>
+	<select id="findPw" parameterType="hashmap" resultType="memberbean">
+		SELECT * FROM TBL_MEMBER WHERE MEMBER_ID=#{member_id} AND MEMBER_PHONE=#{member_phone}
+	</select>
 	<!--<update id="modifyInfo" parameterType="memberbean">
 		UPDATE TBL_MEMBER SET
 		MEMBER_ID = #{member_id}, MEMBER_PW = #{member_pw}, MEMBER_EMAIL=#{member_email}
 		WHERE MEMBER_NUM=${member_num}
 	</update>-->
-	
-	<delete id="delete" parameterType="_int">
-		DELETE FROM TBL_MEMBER WHERE MEMBERNUM = ${membernum}
+	<update id="updatePw" parameterType="memberbean">
+		UPDATE TBL_MEMBER SET
+		MEMBER_PW = #{member_pw} WHERE MEMBER_ID=#{member_id}
+	</update>
+	<update id="updateEmail" parameterType="memberbean">
+		UPDATE TBL_MEMBER SET
+		MEMBER_EMAIL = #{member_email} WHERE MEMBER_ID = #{member_id}
+	</update>
+	<update id="updatePhone" parameterType="memberbean">
+		UPDATE TBL_MEMBER SET
+		MEMBER_PHONE = #{member_phone} WHERE MEMBER_ID = #{member_id}
+	</update>
+	<delete id="deleteMember" parameterType="string">
+		DELETE FROM TBL_MEMBER WHERE MEMBER_ID = #{member_id}
 	</delete>
   </mapper>

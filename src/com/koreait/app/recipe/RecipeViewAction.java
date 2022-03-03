@@ -29,7 +29,7 @@ public class RecipeViewAction implements Action {
 
 		
 		int rc_num = Integer.parseInt(request.getParameter("rc_num"));
-		System.out.println("rc_num: "+rc_num);		
+		System.out.println("RecipeViewAction rc_num: "+rc_num);		
 		rdao.updateViewCnt(rc_num);
 		
 		
@@ -40,7 +40,10 @@ public class RecipeViewAction implements Action {
 			request.setAttribute("replyList", replyList);						
 			request.setAttribute("reply", reply);			
 			forward.setPath("/app/recipe/recipeView.jsp");
-			forward.setRedirect(false);			
+			forward.setRedirect(false);
+			System.out.println("RecipeViewAction recipe = " + recipe);
+			System.out.println("RecipeViewAction replyList = " + replyList);
+			System.out.println("RecipeViewAction reply = " + reply);
 			return forward;
 		}
 		return null;

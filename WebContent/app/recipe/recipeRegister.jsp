@@ -13,62 +13,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="../../green/assets/css/main.css" />
 <style>
-	.cook{
-		text-decoration: none;
-		border-bottom: none;
-		display: inline-block;
-	}
-	.cook img{
-		width: 80px;
-		height: 65px;
-	}
-	#header{
-		padding: 0 1em 0 1em;
-		height: 4.5em;
-		border-bottom: 3px solid green;
-	}
-	#header > nav{
-		margin: auto;
-		float: left;
-		letter-spacing: 0.002em !important;
-	}
-	#header > nav > ul > li.cookSearch{
-		padding-top: 7px;
-	}
-	#header > .navi{
-		text-align: center;
-	}
-	body{
-		background: none;
-	}
-	.cookSearch{
-		position: absolute;
-		float: right;
-		padding-left: 40px;
-		width: 440px;
-	}
-	.cookSearch > a{
-		text-decoration: none;
-		border-bottom: none;
-		padding-left: 10px;
-	}
-	.cookSearch > a > img{
-		padding-top: 3%;
-	}
-	.searchInput{
-		width: 280px !important;  
-		float: left;
-		padding: 0 auto;
-		margin: 0 auto;
-	}
-	.cookFooter{
-		height: 300px;
-	}
-	.cookSearch > a > img{
-		padding-top: 6px;
-		padding-left: 15px;
-		float: left;
-	}
 	/* -- */
 	
 	.image{
@@ -125,9 +69,6 @@
 		height:110px;
 		display: none;
 	}
-	 #main {
-		background-color: transparent !important;
-	}
 	.imagePreview{
 		border: 1px solid #e0e0e0;
 		border-radius: 4px;
@@ -179,18 +120,6 @@
 	.add {
 		text-align: center;
 	}
-	.stepinfo {
-		resize: none;
-		width: 70%;
-		margin: 0;
-		margin-bottom: 10px;
-		display: inline-block;
-		height: 180px;
-	}
-	.step-top {
-		padding: 0 auto;
-		display: flex;
-	}
 	.end {
 		text-align: center;
 	}
@@ -202,41 +131,9 @@
 	<body class="is-preload">
 
 		<!-- Header -->
-			<div id="header">
-				<a class="cook" href="index.html"><img src="../../green/images/logomain.png"></a>
-				<nav id="nav" class="navi">
-					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li>
-							<a href="#">My Page</a>
-							<ul>
-								<li><a href="#">My Recipe</a></li>
-								<li><a href="#">My Liked Recipe</a></li>
-								<li><a href="#">Follow Recipe</a></li>
-								<li>
-									<a href="#">My Menu</a>
-									<ul>
-										<li><a href="#">구매내역</a></li>
-										<li><a href="#">포인트 관리</a></li>
-										<li><a href="#">회원정보 수정</a></li>
-										<li><a href="#">문의</a></li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-						<li><a href="#">레시피 등록</a></li>
-						<li><a href="#">포인트 상점</a></li>
-						<li><a href="#">로그아웃</a></li>
-						<li class="cookSearch">
-	                   		<input class="searchInput" type="text" placeholder="Search">      
-                  			<a href="#"><img src="../../green/images/searchBtnSmall.png"></a>
-	                  	</li>
-					</ul>
-					
-	                  	
-				</nav>
-			</div>
-
+			
+			<%@include file="../../app/include/header_r.jsp" %>
+			
 		<!-- Main -->
 				
 				<div id="main">
@@ -249,12 +146,13 @@
 					<section id="content" class="wrapper">
 						<br><br>
 						<form name="recipeform" method="post" action="${pageContext.request.contextPath}/recipe/RecipeWriteOk.rc" enctype="multipart/form-data">
-								<label for="input-file" class="imagePreview" id="imagePreview">
+							
+ 								<label for="input-file" class="imagePreview" id="imagePreview">
 								<i class="text-hide">대표사진을 등록해주세요<br></i>
 									<i class="fas fa-camera fa-4x"></i>
 								</label>
 									<input name="rc_file_title" id="input-file" type="file">
-									<br><a href="#" id="default"></a>
+									<br><a href="#" id="default"></a> 
 									<label>레시피 제목</label>
 								<input name="rc_title" type="text">	
 									<label>요리소개</label>
@@ -262,89 +160,71 @@
 									<label class="information">카테고리</label>
 									<select name="rc_cate" class="recipe1">
 										<option> 선택 </option>
-										<option value="1">한식</option>
-										<option value="2">중식</option>
-										<option value="3">양식</option>
-										<option value="4">일식</option>
+										<option value="한식">한식</option>
+										<option value="중식">중식</option>
+										<option value="양식">양식</option>
+										<option value="일식">일식</option>
 									</select>
 									<label class="information">요리정보</label>
 									<select name="rc_info" class="recipe">
 										<option>인원</option>
-										<option value="1">1인분</option>
-										<option value="2">2인분</option>
-										<option value="3">3인분</option>
+										<option value="1인분">1인분</option>
+										<option value="2인분">2인분</option>
+										<option value="3인분">3인분</option>
 									</select>
 									<select name="rc_time" class="recipe">
 										<option>시간</option>
-										<option value="1">10분이내</option>
-										<option value="2">20분이내</option>
-										<option value="3">30분이내</option>
+										<option value="10분이내">10분이내</option>
+										<option value="20분이내">20분이내</option>
+										<option value="30분이내">30분이내</option>
 									</select>
 									<select name="rc_dif" class="recipe">
 										<option>난이도</option>
-										<option value="1">초급</option>
-										<option value="2">중급</option>
-										<option value="3">고급</option>
+										<option value="초급">초급</option>
+										<option value="중급">중급</option>
+										<option value="고급">고급</option>
 									</select>
 								
 					<br><hr>
 							<label>재료</label><br>
 							<div class="div">
 								<div class="ingre" id="plus" onmouseover="">			
-									<input type="text" name="in_name" placeholder="양배추">
-									<input type="text" name="in_amount" placeholder="1/2개">
-								<a href="#" class="a"><i class="fas fa-minus-circle"></i></a>
+									<textarea name="in_name" rows="5" cols="10" placeholder="양배추 1/2개" style="white-space:pre; resize:none"></textarea>
+									<!-- <textarea name="in_amount" rows="5" cols="10" placeholder="1/2개" style="resize:none"></textarea> -->
+
 								</div>		
-								<div class="ingre" onmouseover="">
-									<input type="text">
-									<input type="text" name="in_amount">
-								<a href="#" class="a" id="minus"><i class="fas fa-minus-circle"></i></a>
-								</div>
-								<div class="ingre" id="ingr" onmouseover="">
-									<input type="text">
-									<input type="text" name="in_amount">		
-									<a href="#" class="a"><i class="fas fa-minus-circle"></i></a>
-								</div>
+								
 							</div>
-							<div class="add" id="add">
+							
+							<!-- <div class="add" id="add">
 								<a class="button small" onclick=""><i class="fas fa-plus"></i>추가</a>
 								<a class="button small" onclick=""><i class="fas fa-minus"></i>삭제</a>
-							</div> 
+							</div>  -->
 							
 							<br>
 							<hr>
 							<label>요리순서</label>
 							<div id="step">
-							<label>Step</label>
-							<input type="number" name="st_step">
-								<div class="step-top">
-									<textarea class="stepinfo" name="st_content" rows="6"></textarea>
-									<label for="input-file2" class="image2 imagePreview"><br>
+							
+							<!-- <input type="number" name="st_step"> -->
+								<!-- <div class="step-top"> -->
+									<textarea name="st_content" rows="5" cols="30" style="white-space:pre; resize:none"></textarea>
+									<!-- <label for="input-file2" class="image2 imagePreview"><br>
 									<i class="fas fa-plus"></i></label>
-									<input id="input-file2" name="st_file_name" type="file">
-								</div>
-								<div id="tip">
+									<input id="input-file2" name="st_file_name" type="file"> -->
+								<!-- </div> -->
+								<!-- <div id="tip">
 									<a href="#"><i class="fas fa-check"></i>팁 </a>								
 								</div >							
 								<div id="tip-plus">
 									<i class="fas fa-check"></i>팁
 									<textarea class="noresize" name="st_tip" rows="2"></textarea>
-								</div>
+								</div> -->
 							</div>
 							<br>
-							<div id="step-plus" class="end"><a class="button small">+ 순서추가</a></div><br>	
+							<!-- <div id="step-plus" class="end"><a class="button small">+ 순서추가</a></div><br>	 -->
 							<hr>
-							<!-- <h5>요리완성사진</h5>
-							<label for="input-file2" class="image3"><br><i class="fas fa-plus"></i></label>
-								<input id="input-file2" type="file">
-							<label for="input-file2" class="image3"><br><i class="fas fa-plus"></i></label>
-								<input id="input-file2" type="file">
-							<label for="input-file2" class="image3"><br><i class="fas fa-plus"></i></label>
-								<input id="input-file2" type="file">
-							<label for="input-file2" class="image3"><br><i class="fas fa-plus"></i></label>
-								<input id="input-file2" type="file">
-							
-							<hr><br> -->
+
 							<div class="end">
 								<a id="done" href="javascript:sendit()" class="button primary">등록</a>
 								<a class="button">취소</a>
@@ -356,34 +236,8 @@
 			
 
 		<!-- Footer -->
-			<div id="footer" class="cookFooter">
-			   <a href="#" class="button primary">이용약관</a>
-			   <a href="#" class="button primary">개인정보 취급 방침</a>
-			   <ul class="major-icons">
-			      <li>
-			         <h3 class="icon solid fa-phone major"><span class="label">Phone</span></h3>
-			         <p>(010) 123-4567</p>
-			      </li>
-			      
-			      <li>
-			         <h3 class="icon solid fa-map major"><span class="label">Address</span></h3>
-			         <p>1234 Fictional Road<br />
-			            Nashville, TN 00000</p>
-			      </li>
-			               
-			      <li>
-			         <h3 class="icon solid fa-envelope major"><span class="label">Email</span></h3>
-			         <p><a href="#">cooKing@cooKing.com</a></p>
-			      </li>
-			   </ul>
-			            
-			   <ul class="joined-icons">
-			      <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-			      <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-			      <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-			   </ul>
-  		 <span style="color:blue;">Copyright @CooKing</span>
-</div>
+			
+			<%@include file="../../app/include/footer.jsp" %>
 
 		<!-- Scripts -->
 			<script src="../../green/assets/js/jquery.min.js"></script>

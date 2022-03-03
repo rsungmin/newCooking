@@ -16,12 +16,15 @@ public class MemberLogoutAction implements Action{
 		ActionForward forward = new ActionForward();
 		HttpSession session = request.getSession();
 		
-		String member_id = request.getParameter("member_id");
-		String member_password = request.getParameter("member_pw");
 		
-		//MemberDAO mdao = MemberDAO.
-		
-		return null;
+		String member_id = null; 
+		if(session.getAttribute("session_id") != null){ 
+			member_id = String.valueOf(session.getAttribute("session_id")); 
+			session.invalidate(); 
+			}
+		forward.setRedirect(true);
+		forward.setPath(request.getContextPath()+"/main.jsp");
+		return forward;
 	}
 	
 }

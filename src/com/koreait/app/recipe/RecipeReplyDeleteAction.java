@@ -29,7 +29,7 @@ public class RecipeReplyDeleteAction implements Action {
 		
 		rdao.deleteReply(reply_num);
 	
-		forward.setPath(request.getContextPath()+"/recipe/recipeView.re?rc_num="+rc_num);
+		forward.setPath(request.getContextPath()+"/recipe/recipeView.rc?rc_num="+rc_num);
 		forward.setRedirect(true);
 		
 		return forward;

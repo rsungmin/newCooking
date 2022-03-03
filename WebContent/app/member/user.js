@@ -55,18 +55,24 @@ function checkId() {
 	var checkText = document.getElementById("checkText");
 	if(id==null || id==''){
 		checkText.innerHTML = "";
-	} else{
+	}else{
 		var xhr = new XMLHttpRequest();
-		console.log("${pageContext.request.contextPath}" + id);
+		console.log(id);
 		xhr.open("GET", contextPath+"/member/CheckId.me?member_id="+id,true);
+		xhr.responseText = '';
 		xhr.send();
+		console.log("들어옴1");
 		xhr.onreadystatechange = function(){
 			if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
 				console.log(xhr.responseText.trim());
+/*				console.log(responseText);*/
+				console.log("들어옴2");
 				if(xhr.responseText.trim()=="ok"){
 					checkText.innerHTML = "사용할 수 있는 아이디입니다."
-				} else {
+						console.log("들어옴3");
+				}else{
 					checkText.innerHTML = "중복된 아이디입니다."
+						console.log("들어옴4");
 				}
 			}
 		}
@@ -77,6 +83,7 @@ function checkId() {
 
 
 function sendit(){
+	console.log('sendit 함수 호출 ================');
 	const joinform = document.joinform;
 	if(joinform.member_id.value == "" || joinform.member_id.value == null){
 		alert("아이디를 입력하세요.")

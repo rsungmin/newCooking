@@ -42,8 +42,8 @@ public class MemberJoinOkAction {
 			cookie.setPath("/");
 			response.addCookie(cookie);
 			
-			forward.setRedirect(true);
-			forward.setPath("/app/member/memberLogin.jsp");
+			forward.setRedirect(false);
+			forward.setPath(request.getContextPath()+"/app/member/memberLogin.jsp");
 		}
 		return forward;
 	}

@@ -1,5 +1,7 @@
 package com.koreait.app.recipe.dao;
 
+import java.util.HashMap;
+
 public class RecipeBean {
 	private int rc_num;      	
 	private String rc_title;  	
@@ -11,6 +13,7 @@ public class RecipeBean {
 	private String rc_date;      
 	private int rc_viewcnt;	
 	private String member_id;
+	private String member_num;
 	private int rc_like;
 	private String rc_file_title;
 	private String st_step;
@@ -112,6 +115,20 @@ public class RecipeBean {
 	public void setRc_dif(String rc_dif) {
 		this.rc_dif = rc_dif;
 	}
+
+
+	public String getMember_id() {
+		return member_id;
+	}
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
+	}
+	public String getMember_num() {
+		return member_num;
+	}
+	public void setMember_num(String member_num) {
+		this.member_num = member_num;
+	}
 	public String getRc_date() {
 		return rc_date;
 	}
@@ -123,12 +140,6 @@ public class RecipeBean {
 	}
 	public void setRc_viewcnt(int rc_viewcnt) {
 		this.rc_viewcnt = rc_viewcnt;
-	}
-	public String getMember_id() {
-		return member_id;
-	}
-	public void setMember_id(String member_id) {
-		this.member_id = member_id;
 	}
 	
 	
