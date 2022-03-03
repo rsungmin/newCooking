@@ -8,6 +8,7 @@
 
 	<typeAlias type="com.koreait.app.member.dao.MemberBean" alias="memberbean"/>
 	<typeAlias type="com.koreait.app.recipe.dao.RecipeBean" alias="recipebean"/>
+	<typeAlias type="com.koreait.app.recipe.dao.ReplyBean" alias="replybean"/>
 
  	
  </typeAliases> 
@@ -16,10 +17,10 @@
     <environment id="development">
       <transactionManager type="JDBC"/>
       <dataSource type="POOLED">
-        <property name="driver" value="oracle.jdbc.OracleDriver"/>
+        <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
         <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
-        <property name="username" value="web"/>
-        <property name="password" value="web"/>
+        <property name="username" value="C##WEB"/>
+        <property name="password" value="1234"/>
       </dataSource>
     </environment>
   </environments>
@@ -27,6 +28,7 @@
   <mappers>
   	<mapper resource="com/koreait/sql/member.xml"/>
   	<mapper resource="com/koreait/sql/recipe.xml"/>
+
   </mappers>
   
   

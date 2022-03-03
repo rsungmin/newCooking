@@ -14,65 +14,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="./green/assets/css/main.css" />
-<style>
-	.cook{
-		text-decoration: none;
-		border-bottom: none;
-		display: inline-block;
-	}
-	.cook img{
-		width: 80px;
-		height: 65px;
-	}
-	#header{
-		padding: 0 1em 0 1em;
-		height: 4.5em;
-		border-bottom: 3px solid green;
-	}
-	#header > nav{
-		margin: auto;
-		float: left;
-		letter-spacing: 0.002em !important;
-	}
-	#header > nav > ul > li.cookSearch{
-		padding-top: 7px;
-	}
-	#header > .navi{
-		text-align: center;
-	}
-	body{
-		background: none;
-	}
-	.cookSearch{
-		position: absolute;
-		float: right;
-		padding-left: 40px;
-		width: 440px;
-	}
-	.cookSearch > a{
-		text-decoration: none;
-		border-bottom: none;
-		padding-left: 10px;
-	}
-	.cookSearch > a > img{
-		padding-top: 3%;
-	}
-	.searchInput{
-		width: 280px !important;  
-		float: left;
-		padding: 0 auto;
-		margin: 0 auto;
-	}
-	.cookFooter{
-		height: 300px;
-	}
-	.cookSearch > a > img{
-		padding-top: 6px;
-		padding-left: 15px;
-		float: left;
-	}
-	
-	/* ---- */
+<style>	
 	.categories{
 				justify-content: center;
     			display: flex;
@@ -93,52 +35,17 @@
 			    border-radius: 50%;
 			    font-size: 1.3em;
 			}
-	#recipeList{
-				height:500px;
-				display:none;
-			}
+	.col-4{
+		cursor: pointer;
+	}
 </style>
 	</head>
 	<body class="is-preload">
-
-		<!-- Header -->
-			<div id="header">
-				<a class="cook" href="index.html"><img src="./green/images/logomain.png"></a>
-				<nav id="nav" class="navi">
-					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li>
-							<a href="#">My Page</a>
-							<ul>
-								<li><a href="#">My Recipe</a></li>
-								<li><a href="#">My Liked Recipe</a></li>
-								<li><a href="#">Follow Recipe</a></li>
-								<li>
-									<a href="#">My Menu</a>
-									<ul>
-										<li><a href="#">구매내역</a></li>
-										<li><a href="#">포인트 관리</a></li>
-										<li><a href="#">회원정보 수정</a></li>
-										<li><a href="#">문의</a></li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-						<li><a href="#">포인트 상점</a></li>
-						<li><a href="#">로그아웃</a></li>
-						<li class="cookSearch">
-	                   		<input class="searchInput" type="text" placeholder="Search">      
-                  			<a href="#"><img src="./green/images/searchBtnSmall.png"></a>
-	                  	</li>
-					</ul>
-					
-	                  	
-				</nav>
-			</div>
-
+	
+	<%@include file="../app/include/header_m.jsp" %>
 		<!-- Main -->
 			<div id="main">
-				
+				<c:set var="page" value="${requestScope.page}" />
 					
 
 				<!-- Header -->
@@ -147,11 +54,11 @@
 						</div>					
 						
 						<div class="categories">
-							<div id="category1" class="linktomouseover" 
+							<div id="category1" class="linktomouseover" OnClick="location.href ='${pageContext.request.contextPath}/recipe/recipeList.rc'"
 								style="background-image: url(./green/images/전체아이콘들.jpg); background-size: 100px; background-position: 30% 5%; cursor:pointer;">
 								<h2>전체</h2>
 							</div>
-							<div id="category2" class="linktomouseover" OnClick="location.href ='app/buyList.jsp'" style="background-image: url(./green/images/한식아이콘.png); background-position: 50% 5%; cursor:pointer;">
+							<div id="category2" class="linktomouseover" OnClick="location.href ='${pageContext.request.contextPath}/recipe/recipeListKor.rc'" style="background-image: url(./green/images/한식아이콘.png); background-position: 50% 5%; cursor:pointer;">
 								<h2>한식</h2>
 							</div>
 							<div id="category3" class="linktomouseover" OnClick="location.href ='app/buyList.jsp'" style="background-image: url(./green/images/중식아이콘.png); background-position: 50% 45%; cursor:pointer;">
@@ -180,70 +87,43 @@
 							</div>
 						</div>
 					</section>
-					<section id="recipeList">
-						<div class = "box alt">
-					<div class="box alt">
-					<div class="row gtr-uniform">
-				
-					</div>
-				</div>
-					</section>
+					
 
 				<!-- One -->
+				<c:set var="recipe" value="${requestScope.recipe}" />
+				<c:set var="list" value="${requestScope.recipeList}"/>
+
+				
 					<section id="one" class="wrapper spotlight">
-						<div class="content">
-							<div class="inner">
-								<h2>Best Cooker</h2>
-									<ul class="alt">
-										<li><a style="border-bottom: none;" href="#">자취생을 위한 초간단 <strong>냉라면</strong></a></li>
-										<li><a style="border-bottom: none;" href="#">CooKing의 추천 <strong>봉골레 파스타</strong></a></li>
-										<li><a style="border-bottom: none;" href="#">집에서도 할 수 있다! <strong>짜장면</strong></a></li>
-										<li><a style="border-bottom: none;" href="#">간식 또는 식사대용으로 좋은 <strong>토스트</strong></a></li>
-										<li><a style="border-bottom: none;" href="#">이열치열 무더운 여름 든든한 <strong>삼계탕</strong>으로 몸보신!</a></li>
-									</ul>
-								<ul class="actions">
-									<li><a href="#" class="button">전체 레시피 보러가기</a></li>
+					  <%-- <div class="content">
+							<div class="inner"> 
+								 <h2>Best Cooker</h2> 
+									<c:choose>
+										<c:when test="${list!=null and fn:length(list)>0 }">
+											<c:forEach var="recipe" items="${list}">
+												<div class="col-4" OnClick="location.href ='${pageContext.request.contextPath}/recipe/recipeView.rc?rc_num=${recipe.getRc_num()}'">
+												<span class="image fit">
+												<img class="img" src="app/upload/${recipe.getRc_file_title()}">
+												<strong> ${recipe.getRc_title() } </strong>
+												<!-- <div class="btn-like"> -->
+													<i class="fas fa-heart">${recipe.getRc_like() }</i>
+												<!-- </div> -->
+												조회수(${recipe.getRc_viewcnt() })
+												</span>
+												</div>
+											</c:forEach>
+										</c:when>
+										<c:otherwise>
+											<tr height="50px" align="center">
+												<td colspan="5">등록된 게시물이 없습니다.</td>
+											</tr>
+										</c:otherwise>
+									</c:choose> 
+								 <ul class="actions">
+									<li><a href="${pageContext.request.contextPath}/recipe/recipeList.rc" class="button small">전체 레시피 보러가기</a></li>
 								</ul>
 							</div>
-						</div>
-						<ul class="grid-icons">
-							<li>
-								<div class="inner" style="height: 250px;">
-									<span class="icon solid fa-cog major" style="margin-top: 45px;"></span>
-									<h3>좋아요 많이 받은 순</h3>
-									<ul class="actions" style="display: table; margin-left:auto; margin-right:auto;">
-									<li><a href="#" class="button small" style="margin-bottom: 25px;">레시피 보기</a></li>
-									</ul>
-								</div>
-							</li>
-							<li>
-								<div class="inner" style="height: 250px;">
-									<span class="icon solid fa-desktop major" style="margin-top: 45px;"></span>
-									<h3>조회수 많은 순</h3>
-									<ul class="actions" style="display: table; margin-left:auto; margin-right:auto;">
-									<li><a href="#" class="button small" style="margin-bottom: 25px;">레시피 보기</a></li>
-									</ul>
-								</div>
-							</li>
-							<li>
-								<div class="inner" style="height: 250px;">
-									<span class="icon solid fa-signal major" style="margin-top: 45px;"></span>
-									<h3>CooKING 추천 레시피</h3>
-									<ul class="actions" style="display: table; margin-left:auto; margin-right:auto;">
-									<li><a href="#" class="button small" style="margin-bottom: 25px;">레시피 보기</a></li>
-									</ul>
-								</div>
-							</li>
-							<li>
-								<div class="inner" style="height: 250px;">
-									<span class="icon solid fa-check major" style="margin-top: 45px;"></span>
-									<h3>남녀노소 추천 레시피</h3>
-									<ul class="actions" style="display: table; margin-left:auto; margin-right:auto;">
-									<li><a href="#" class="button small" style="margin-bottom: 25px;">레시피 보기</a></li>
-									</ul>
-								</div>
-							</li>
-						</ul>
+						</div>			 --%> 	 		
 					</section>
 
 				<!-- Two -->
@@ -251,15 +131,15 @@
 						<div class="content">
 							<div class="inner">
 								<h2>이달의 Best Cooker 선정!</h2>
-								<p>Best Cooker는 레시피 조회수와 좋아요에 따라 투표 권한을 부여받습니다.</p>
+								<p>이달의 Best Cooker를 뽑아주세요!</p>
 								<ul class="actions">
-									<li><a href="#" class="button">투표하러가기</a></li>
-									<li><a href="#" class="button">레시피 등록하기</a></li>
+									<li><a href="${pageContext.request.contextPath}/recipe/recipeList.rc" class="button small">레시피 보러가기</a></li>
+									<li><a href="app/recipe/recipeRegister.jsp" class="button small">레시피 등록하기</a></li>
 								</ul>
 							</div>
 						</div>
-						<div class="image" style="background-image: url(&quot;./green/images/pic02.jpg&quot;); background-position: 30% 30%;">
-							<img src="./green/images/요리왕.jpg" data-position="30% 30%" alt="" style="display: none;">
+						<div class="image">
+							<img src="./green/images/요리왕.jpg">
 						</div>
 					</section>
 
@@ -268,9 +148,9 @@
 						<div class="content">
 							<div class="inner">
 								<h2>오늘의 추천</h2>
-								<p>로제크림치킨 l 귀차니즘이 폭팔하는 오늘같은 날! 편의점 재료로 떼우쟈!</p>
+								<p>로제크림치킨 l 귀차니즘이 폭팔하는 오늘같은 날!<br>편의점 재료로 떼우쟈!</p>
 								<ul class="actions">
-									<li><a href="#" class="button">더보기</a></li>
+									<li><a href="#" class="button small">더보기</a></li>
 								</ul>
 							</div>
 						</div>
@@ -280,7 +160,7 @@
 					</section>
 
 				<!-- Four -->
-					<section id="four" class="wrapper style3 spotlight alt">
+				<!-- 	<section id="four" class="wrapper style3 spotlight alt">
 						<div class="content">
 							<div class="inner">
 								<h2>포인트 상점</h2>
@@ -293,99 +173,11 @@
 						<div class="image">
 							<img src="./green/images/식기구모음.jpg" data-position="top right" alt="" />
 						</div>
-					</section>
+					</section> -->
 
-				<!-- Five -->
-					<section id="five" class="wrapper special">
-   <h1>Best Cooker Ranking</h1>
-      <h3>지난 달 Best Cooker에 선정된 5인 입니다.</h3>
-      <div style="margin:0 auto; padding: 0 auto;">
-         <ul class="faces"">
-         
-            <li style="width:50px; align: center;">
-               <span class="image"><img style="width:100px;" src="./green/images/profile.jpg" alt="" /></span>
-                  <h3>1위 아이디</h3>
-                  <a style="padding: 0 2em;" class="button small">팔로우 하기</a>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <p>"집에서 만든 저만의 김치찌개 입니다. 너무 맛있습니다."</p>
-                  &nbsp;
-                  <a style="text-decoration: none; border-bottom: none;" href="#">Learn More</a>
-                  
-            </li>
-         
-            <li style="width:50px; align: center; border-left-width: 0;">
-               <span class="image"><img style="width:100px;" src="./green/images/profile.jpg" alt="" /></span>
-                  <h3>2위 아이디</h3>
-                  <a style="padding: 0 2em;" class="button small">팔로우 하기</a>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <p>"스테이크 레스토랑 처럼 흉내를 내봤습니다. 집에서도 분위기 있게 먹었습니다"</p>
-                  &nbsp;                  
-                  <a style="text-decoration: none; border-bottom: none;" href="#">Learn More</a>
-            </li>
-            <li style="width:50px; align: center; border-left-width: 0;">
-               <span class="image"><img style="width:100px;" src="./green/images/profile.jpg" alt="" /></span>
-                  <h3>3위 아이디</h3>
-                  <a style="padding: 0 2em;" class="button small">팔로우 하기</a>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                  
-                  <p>"저만의 퓨전요리를 만들어 보았습니다. 긴가민가  했지만 너무 맛있습니다."</p>
-                  &nbsp;
-                  <a style="text-decoration: none; border-bottom: none;" href="#">Learn More</a>
-            </li>
-            <li style="width:50px; align: center; border-left-width: 0;">
-               <span class="image"><img style="width:100px;" src="./green/images/profile.jpg" alt="" /></span>
-                  <h3>4위 아이디</h3>
-                  <a style="padding: 0 2em;" class="button small">팔로우 하기</a>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <p>"제가 처음으로 시도해본 중화요리 입니다. 재료가 많이 들어가지만 굳이 시켜먹을 필요가 없더군요."</p>
-                  &nbsp;                  
-                  <a style="text-decoration: none; border-bottom: none;" href="#">Learn More</a>
-            </li>
-            <li style="width:50px; align: center; border-left-width: 0;">
-               <span class="image"><img style="width:100px;" src="./green/images/profile.jpg" alt="" /></span>
-                  <h3>5위 아이디</h3>
-                  <a style="padding: 0 2em;" class="button small">팔로우 하기</a>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <p>"저렴한 회를 사용하여 맛있는 스시를 만들어 보았습니다."</p>
-                  &nbsp;
-                  <a style="text-decoration: none; border-bottom: none;" href="#">Learn More</a>
-            </li>
-         </ul>
-         </div>
-</section>
-</div>
 			
-			
-
-		<!-- Footer -->
-			<div id="footer" class="cookFooter">
-			   <a href="#" class="button primary">이용약관</a>
-			   <a href="#" class="button primary">개인정보 취급 방침</a>
-			   <ul class="major-icons">
-			      <li>
-			         <h3 class="icon solid fa-phone major"><span class="label">Phone</span></h3>
-			         <p>(010) 123-4567</p>
-			      </li>
-			      
-			      <li>
-			         <h3 class="icon solid fa-map major"><span class="label">Address</span></h3>
-			         <p>1234 Fictional Road<br />
-			            Nashville, TN 00000</p>
-			      </li>
-			               
-			      <li>
-			         <h3 class="icon solid fa-envelope major"><span class="label">Email</span></h3>
-			         <p><a href="#">cooKing@cooKing.com</a></p>
-			      </li>
-			   </ul>
-			            
-			   <ul class="joined-icons">
-			      <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-			      <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-			      <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-			   </ul>
-  		 <span style="color:blue;">Copyright @CooKing</span>
+         		<%@include file="../app/include/footer.jsp" %>
 </div>
-
 		<!-- Scripts -->
 			<script src="./green/assets/js/jquery.min.js"></script>
 			<script src="./green/assets/js/jquery.dropotron.min.js"></script>
@@ -423,7 +215,124 @@
 		$('#recipeList').show();
 	});
 	
-	  
+	
+	/* function recList1(){
+		// 추천버튼 클릭시(추천 추가 또는 추천 제거)
+		$("#category1").click(function(){
+			$.ajax({
+				url: "${pageContext.request.contextPath}/recipe/recipeList.rc",
+	            type: "POST",
+	            data: {
+	                rc_num: ${recipe.getRc_num()},
+	                member_id: '${session_id.getMember_id()}'
+	            },
+	            success: function () {
+			        recCount();
+	            },
+			})
+		})} */
+		
+	//게시글 추천수
+	/* function recList() {
+			
+		$.ajax({
+			url: "${pageContext.request.contextPath}/recipe/recipeListMain.rc",
+	        type: "GET",
+	       
+	        /* data:{
+	        	
+	        		recipe:'${requestScope.recipe}',
+	        		recipeList:'${requestScope.recipeList}'
+	       } 
+	        	, */
+	        
+	       /* success: function (recipe, recipeList) {
+	        	//<c:set var="recipe" value="${requestScope.recipe}" />
+				//<c:set var="recipeList" value="${requestScope.recipeList}"/>
+				
+				//<c:set var="rc_num" value="${recipe.getRc_num()}"/>
+				//var recipe='${recipe}';
+				//var recipeList='${list}';
+;				//var recipe='<c:out value="${recipe}"/>';
+				//var recipeList='<c:out value="${recipeList}"/>';
+
+				console.log("recipe2 : "+recipe);
+				console.log("recipeList2 : "+recipeList);
+				/* var rc_num = document.getElementById("rc_num").value;
+				var rc_file_title = document.getElementById("rc_file_title").value;
+				var rc_title = document.getElementById("rc_title").value;
+				var rc_like = document.getElementById("rc_like").value;
+				var rc_viewCnt = document.getElementById("rc_viewCnt").value;
+				console.log("rc_num : "+rc_num); */
+				
+			
+				
+				
+	        /* 	if(recipe != null && recipeList!=null){
+		        	var html = "<div class=\"content\">";
+		        	html+="<div class=\"inner\">";
+					html+="<h2>Best Cooker</h2>";
+					for (var i in recipeList) {  
+					//var user = recipeList;          
+					html += "<div class=\"col-4\" OnClick=\"location.href ='${pageContext.request.contextPath}/recipe/recipeView.rc?rc_num=${recipe.getRc_num()}\'>";
+					html += "<span class=\"image fit\">;"
+					html += "<img class=\"img\" src=\"app/upload/${recipe.getRc_file_title()}\'>";
+					html += "<strong>${recipe.getRc_title()}</strong>";
+					html += "<i class=\"fas fa-heart\">${recipe.getRc_like()}</i>";
+					html += "조회수(${recipe.getRc_viewcnt()})";
+					html += "</span>";
+					html += "</div>";
+					  }  
+					html+="<ul class=\"actions\">";
+					html+="<li><a href=\"${pageContext.request.contextPath}/recipe/recipeList.rc\" class=\"button small\">전체 레시피 보러가기</a></li>";
+					html+="</ul>";	
+					$("#one").html(html);
+	        		
+	        	}
+	        	console.log("success");
+	        	console.log("${recipe.getRc_file_title()}");
+	        },  */
+	        /* success: function(data){
+	        	var result = data.recipeList;
+	        	var str ="<div class=\"content\">";
+	        	str += "<div class=\"inner\">";
+	        	$.each(results, function(i){
+	        		str+="<div class=\"col-4\" OnClick=\"location.href ='${pageContext.request.contextPath}/recipe/recipeView.rc?rc_num="+results[i].${recipe.getRc_num()}+"'\">";
+	        		str+="<span class=\"image fit\">;"
+	        		str+="<img class=\"img\" src=\"app/upload/"+results[i].${recipe.getRc_file_title()}+"\">";
+	        		str+="<strong>"+ results[i].${recipe.getRc_title() } +"</strong>";
+	        		str+="<i class=\"fas fa-heart\">"+results[i].${recipe.getRc_like() }+"</i>";
+	        		str+="조회수"+results[i].(${recipe.getRc_viewcnt() });
+	        		str+="</span>";
+	        		str+="</div>";	        		
+	        	});
+	        	$("#one").append(str);
+	        }, */
+	/*         error: function(error){
+	        	console.log("error");
+	        }
+		})
+	} 
+
+	recList(); // 처음 시작했을 때 실행되도록 해당 함수 호출   */
+
+	
+/* 	window.onload=function(){
+		var formData = new FormData();
+		$.ajax({
+			url: "${pageContext.request.contextPath}/recipe/recipeListMain.rc",
+	        type: "GET",
+	        dataType : "html", 
+	        data : formData,
+			success: function(){
+				$("#one").html("/app/recipe/mainList.jsp");				
+				},
+			error: function(error){
+		        console.log("error");
+		        }
+			}
+
+	} */
 
 </script>
 </html>
